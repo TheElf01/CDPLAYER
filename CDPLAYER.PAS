@@ -872,6 +872,14 @@ begin
  MyWriteln('         The whole CD will be played over and over.         ');
     end
    else
+ If MouseIn(1,2,80,5) then
+    begin
+     fgColor:=12; bgcolor:=5;
+     Gotoxy(10,47);
+ MyWriteln('        Modificaciones al codigo por TheElf *2024*         ');
+    end
+   else
+
  If MouseIn(10,47,70,47) then
     begin
      fgColor:=12; bgcolor:=5;
@@ -879,7 +887,7 @@ begin
  MyWriteln('           Go away, here is nothing of interest.            ');
     end
    else
- If MouseIn(27,35,52,43) then
+ If MouseIn(27,30,52,43) then
     begin
      fgColor:=13; bgcolor:=5;
      Gotoxy(10,47);
@@ -917,11 +925,11 @@ begin
              MyWriteln('       No CD found.       ');
              TrackPosition   := 0;
              ActualTrack.TNr := 0;
-             for Counter := 1 to 9 do
+             for Counter := 1 to 14 do
                  begin
                   If Counter <= ActualCD.HTrack then
                      begin
-                      gotoxy(28,34 + Counter);
+                      gotoxy(28,29 + Counter);
                       MyWriteln('                         ');
                      end;
                  end;
@@ -940,15 +948,15 @@ begin
              close(CodeFile);
              TrackPosition   :=0;
              ActualTrack.Tnr :=1;
-             for Counter := 1 to 9 do
+             for Counter := 1 to 14 do
                  begin
                   If Counter <= ActualCD.HTrack then
                      begin
                       TempStr1:=GetTrackName(Counter);
                       close(CodeFile);
-                      gotoxy(28,34 + Counter);
+                      gotoxy(28,29 + Counter);
                       MyWriteln('                         ');
-                      gotoxy(28,34 + Counter);
+                      gotoxy(28,29 + Counter);
                       If ActualCD.HTrack >= Counter then
                          MyWriteln(TempStr1);
                      end;
@@ -997,21 +1005,21 @@ begin
            end;
        end;
  If AnimateTimer mod 5 = 0 then
-    If MouseIn(53,35,53,35) and (bttn = 1) then
+    If MouseIn(53,30,53,30) and (bttn = 1) then
        begin
         FgColor := 12;
         if ActualCD.LTrack <> 1 - TrackPosition then
            begin
             dec(TrackPosition);
-            for Counter := 1 + TrackPosition to 9 + TrackPosition do
+            for Counter := 1 + TrackPosition to 14 + TrackPosition do
                 begin
                  If Counter <= ActualCD.HTrack then
                     begin
                      TempStr1:=GetTrackName(Counter);
                      close(CodeFile);
-                     gotoxy(28,34 + Counter-TrackPosition);
+                     gotoxy(28,29 + Counter-TrackPosition);
                      MyWriteln('                         ');
-                     gotoxy(28,34 + Counter-TrackPosition);
+                     gotoxy(28,29 + Counter-TrackPosition);
                      If ActualCD.HTrack >= Counter then MyWriteln(TempStr1);
                     end;
                 end;
@@ -1021,18 +1029,18 @@ begin
     If MouseIn(53,43,53,43) and (bttn = 1) then
        begin
         FgColor := 12;
-        if ActualCD.HTrack > 9 + TrackPosition then
+        if ActualCD.HTrack > 14 + TrackPosition then
            begin
             inc(TrackPosition);
-            for Counter := 1 + TrackPosition to 9 + TrackPosition do
+            for Counter := 1 + TrackPosition to 14 + TrackPosition do
                 begin
                  If Counter <= ActualCD.HTrack then
                     begin
                      TempStr1:=GetTrackName(Counter);
                      close(CodeFile);
-                     gotoxy(28,34 + Counter-TrackPosition);
+                     gotoxy(28,29 + Counter-TrackPosition);
                      MyWriteln('                         ');
-                     gotoxy(28,34 + Counter-TrackPosition);
+                     gotoxy(28,29 + Counter-TrackPosition);
                      If ActualCD.HTrack >= Counter then MyWriteln(TempStr1);
                     end;
                 end;
@@ -1095,11 +1103,11 @@ begin
      StopOrPausePlayingCD(ActualDrive);
      Finish := True;
     end;
- If MouseIn(27,35,52,43) and (bttn = 1) then
+ If MouseIn(27,30,52,43) and (bttn = 1) then
     begin
      ActualLocation  := 0;
      ResumeReady     := False;
-     ActualTrack.TNr := MausY - 34 + TrackPosition;
+     ActualTrack.TNr := MausY - 29 + TrackPosition;
      GetTrackInfo(ActualDrive, ActualTrack.TNr);
      LoopOn := False;
      If Playing then
@@ -1131,7 +1139,7 @@ begin
     end;
  If not Playing then
     begin
-     If MouseIn(27,32,52,32) and (bttn = 2) then
+     If MouseIn(27,26,52,26) and (bttn = 2) then
         begin
          If SearchForCDCode = False then
             begin
@@ -1179,12 +1187,12 @@ begin
          close(CodeFile);
          BgColor := 5;
          FgColor := 12;
-         gotoxy(28,32); MyWriteln('                         ');
-         gotoxy(28,32); MyWriteln(InputText);
+         gotoxy(28,26); MyWriteln('                         ');
+         gotoxy(28,26); MyWriteln(InputText);
         end;
-     If MouseIn(27,35,52,43) and (bttn = 2) then
+     If MouseIn(27,30,52,43) and (bttn = 2) then
         begin
-         TempTime := MausY - 34 + TrackPosition;
+         TempTime := MausY - 29 + TrackPosition;
          If SearchForCDCode = False then
             begin
              close(CodeFile);
@@ -1233,15 +1241,15 @@ begin
          DrawWindow(2,26,15,53,17,0,0);
          FgColor := 12;
          BgColor := 5;
-         for Counter := 1 + TrackPosition to 9 + TrackPosition do
+         for Counter := 1 + TrackPosition to 14 + TrackPosition do
              begin
               If Counter <= ActualCD.HTrack then
                  begin
                   TempStr1:=GetTrackName(Counter);
                   close(CodeFile);
-                  gotoxy(28,34 + Counter-TrackPosition);
+                  gotoxy(28,29 + Counter-TrackPosition);
                   MyWriteln('                         ');
-                  gotoxy(28,34 + Counter-TrackPosition);
+                  gotoxy(28,29 + Counter-TrackPosition);
                   If ActualCD.HTrack >= Counter then MyWriteln(TempStr1);
                  end;
              end;
@@ -1278,13 +1286,13 @@ begin
  DrawWindow(2,9,46,70,48,14,5);
  Gotoxy(24,46);
  MyWriteln('Information from the CD-player');
- DrawWindow(2,26,34,53,44,14,5);
- DrawBlk(53,35,43);
- Gotoxy(30,34);
+ DrawWindow(2,26,29,53,44,14,5);
+ DrawBlk(53,30,43);
+ Gotoxy(30,29);
  MyWriteln('Name of the tracks:');
  DrawWindow(1,26,25,53,27,14,5);
- Gotoxy(32,25);
- MyWriteln('Name of the CD:');
+ Gotoxy(31,25);
+ MyWriteln(' Name of the CD: ');
  FgColor:=12;
  gotoxy(27,26);
  MyWriteln('     No drive choosen.    ');
@@ -1335,7 +1343,7 @@ begin
      Reset(CodeFile);
     end;
  close(CodeFile);
- PlayType        := 1;
+ PlayType        := 3;
  CDPosition      := 0;
  TrackPosition   := 0;
  ActualDrive     := 0;
@@ -1414,11 +1422,11 @@ begin
          MyWriteln('      No CD Inserted      ');
          TrackPosition   := 0;
          ActualTrack.TNr := 0;
-         for MainCounter := 1 to 9 do
+         for MainCounter := 1 to 14 do
              begin
               If MainCounter <= ActualCD.HTrack then
                  begin
-                  gotoxy(28,34 + MainCounter);
+                  gotoxy(28,29 + MainCounter);
                   MyWriteln('                         ');
                  end;
              end;
